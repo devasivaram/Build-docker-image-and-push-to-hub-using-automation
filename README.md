@@ -79,7 +79,7 @@ Added these:
     docker_user: ${your_docker_hub_username}
     docker_password: ${your_docker_hub_password}
     version: "1"                       
-    hub_name: "devanandts/mysite"     
+    image_name: "devanandts/mysite"     
     packages:
        - docker
        - python2-pip
@@ -111,7 +111,7 @@ Added these:
       docker_image:
         build:
           path: /home/ec2-user/project/    ------------------------------->> Your file path
-        name: "{{hub_name}}"
+        name: "{{image_name}}"
         tag: "{{ item }}"
         source: build
         push: yes
@@ -127,7 +127,7 @@ Added these:
     - name: "Adding a httpd container"     -------------------------------->> Creating docker container from pushed image
       docker_container:
         name: httpd-container1
-        image: "{{hub_name}}:{{ version }}"
+        image: "{{image_name}}:{{ version }}"
         recreate: true
         state: started
         ports:
@@ -138,7 +138,7 @@ Here we used variables declared by "vars", The variables are:
   
   1. docker_user & docker_password: Need to substitute your docker hub credentials
   2. version: Need to specify your desired version number or tag
-  3. hub_name: Need to put user docker hub username/(any variable)
+  3. image_name: Need to put user docker hub username/(any variable)
   4. packages: Specified the necessary packgaes needed for our project
   5. User: specify your system user or desired user
 
